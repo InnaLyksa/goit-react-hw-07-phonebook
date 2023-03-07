@@ -17,7 +17,17 @@ const contactsSlice = createSlice({
     [fetchContacts.pending]: handlePending,
     [fetchContacts.fulfilled](state, action) {
       state.isLoading = false;
-      state.items = action.payload;
+      // state.items = action.payload;
+      state.items = action.payload.sort(function (a, b) {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+        // a должно быть равным b
+        return 0;
+      });
       state.error = null;
     },
     [fetchContacts.rejected]: handleRejected,
