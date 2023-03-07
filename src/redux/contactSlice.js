@@ -18,16 +18,7 @@ const contactsSlice = createSlice({
     [fetchContacts.fulfilled](state, action) {
       state.isLoading = false;
       // state.items = action.payload;
-      state.items = action.payload.sort(function (a, b) {
-        if (a.name > b.name) {
-          return 1;
-        }
-        if (a.name < b.name) {
-          return -1;
-        }
-        // a должно быть равным b
-        return 0;
-      });
+      state.items = action.payload.sort((a, b) => a.name.localeCompare(b.name));
       state.error = null;
     },
     [fetchContacts.rejected]: handleRejected,
