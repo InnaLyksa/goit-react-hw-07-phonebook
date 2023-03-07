@@ -16,7 +16,7 @@ import {
 const nameInputId = nanoid();
 const numberInputId = nanoid();
 
-const numberRegEx =
+const phoneRegEx =
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
 const nameRegEx = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
 
@@ -29,9 +29,9 @@ const schema = yup.object().shape({
       excludeEmptyString: false,
     })
     .required('Name is required field!'),
-  number: yup
+  phone: yup
     .string()
-    .matches(numberRegEx, {
+    .matches(phoneRegEx, {
       message:
         'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
       excludeEmptyString: false,
@@ -41,7 +41,7 @@ const schema = yup.object().shape({
 
 const initialValues = {
   name: '',
-  number: '',
+  phone: '',
 };
 
 export const ContactForm = () => {
@@ -53,13 +53,13 @@ export const ContactForm = () => {
       ({ name }) => name.toLowerCase() === values.name.toLowerCase()
     );
     const isDublicateNumber = contacts.find(
-      ({ number }) => number === values.number
+      ({ phone }) => phone === values.phone
     );
     if (isDublicateName) {
       return Notification(values.name);
     } else {
       if (isDublicateNumber) {
-        return Notification(values.number);
+        return Notification(values.phone);
       }
     }
     console.log(values);
@@ -78,8 +78,8 @@ export const ContactForm = () => {
         <MessageError name="name" component="div" />
 
         <LabelContactForm htmlFor={numberInputId}>Number:</LabelContactForm>
-        <InputContactForm id={numberInputId} type="tel" name="number" />
-        <MessageError name="number" component="div" />
+        <InputContactForm id={numberInputId} type="tel" name="phone" />
+        <MessageError name="phone" component="div" />
 
         <ButtonSubmit type="submit">Add contact</ButtonSubmit>
       </FormAddContact>
