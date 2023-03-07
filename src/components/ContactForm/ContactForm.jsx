@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { nanoid } from 'nanoid';
@@ -46,7 +46,7 @@ const initialValues = {
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = (values, { resetForm }) => {
     const isDublicateName = contacts.find(
@@ -86,6 +86,7 @@ export const ContactForm = () => {
     </Formik>
   );
 };
+
 // import { useState } from 'react';
 // import { nanoid } from 'nanoid';
 // import { useDispatch, useSelector } from 'react-redux';
