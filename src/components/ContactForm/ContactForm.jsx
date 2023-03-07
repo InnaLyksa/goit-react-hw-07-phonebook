@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactSlice';
+import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -62,7 +62,7 @@ export const ContactForm = () => {
         return Notification(values.number);
       }
     }
-
+    console.log(values);
     dispatch(addContact(values));
     resetForm();
   };

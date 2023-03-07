@@ -7,8 +7,8 @@ export const ContactList = () => {
   const contacts = useSelector(getFilteredContacts);
   return (
     <List>
-      {contacts.map(({ id, name, number }) => (
-        <ContactItem key={id} id={id} name={name} number={number} />
+      {contacts.map(({ id, name, phone }) => (
+        <ContactItem key={id} id={id} name={name} number={phone} />
       ))}
     </List>
   );
